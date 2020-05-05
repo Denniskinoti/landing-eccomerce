@@ -1,0 +1,42 @@
+<%- include('../partials/header'); %>
+
+	<div class="row">
+		<h3 class="page-header"><%=product.title %></h3>
+
+		<div class=" col-lg-8">
+			<img class="imm" src="/productImage/<%=product.id%>/<%=product.image%>" alt="no pic">
+		 </div>
+		 
+		 <div class="col-lg-4" style="position: relative;left: 480px">
+		 	
+			 	<p><%-product.description %></p>
+			 	<p>$<%= parseFloat(product.price).toFixed(2) %> </p>
+			 	<p><a href="/cart/add/<%=product.slug%>">Add to Cart </a></p>
+		
+		 </div>
+
+		 <div class="col-xs-12">
+		 	<ul class="gallery">
+		 		<%gallery.forEach(function(image) {%>
+		 			<%if(image != 'thumbs') {%>
+		 				<a href="/productImage/<%=product.id%>/gallery/<%=image%>"> <img src="/productImage/<%=product.id%>/gallery/thumbs/<%=image%>">
+
+		 			<%}%>
+		 		<%})%>
+		 			
+		 		
+		 	</ul>
+		 	
+		 </div>
+
+		 
+		
+	</div>
+
+	
+
+
+	
+
+
+<%- include('../partials/footer'); %>

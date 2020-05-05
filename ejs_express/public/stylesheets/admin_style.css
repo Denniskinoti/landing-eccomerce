@@ -1,0 +1,26 @@
+body {
+     padding: 60px;
+  }
+
+#imgPreview {
+   	margin:25px;
+}
+
+#imag {
+	height: 100px;
+	width: 100px;
+}
+
+ul.gallery {
+	padding: 0;
+}
+
+ul.gallery li:first-child {
+	margin-left: 0;
+}
+
+ul.gallery {
+	margin: 20px;
+	display: inline-block;
+	list-style:none;
+}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>this i it</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+      <link href="/stylesheets/style.css" rel="stylesheet">
+
+   
+   
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">Eccomerce mock</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+
+          <%pages.forEach(function(page) {%>
+              <%if(page.slug == "home") {%>
+                <li class="nav-item active">
+                 <a class="nav-link" href="/page/"><%=page.title%> <span class="sr-only">(current)</span></a>
+            <%}else {%>
+                <li class="nav-item ">
+                 <a class="nav-link" href="/page/<%=page.slug %>"><%=page.title%> <span class="sr-only">(current)</span></a>
+               </li>
+            <%}%>          
+
+         <% })%>        
+          
+           <ul class=" mr-auto navbar-right">
+            <li class="nav-item  ">
+              <a class="nav-link" href="/cart/checkout">My Cart (
+                  <%if (typeof cart !== "undefined") {%>
+                    <%= cart.length %>
+                <%}else {%>
+                  0
+              <%}%>
+              )</a>
+            </li>  
+          </ul>        
+         
+        </ul>
+
+
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+   this is it <%= cart %>
+    
+
+    <div class="container">
+      
+
+      <div class="row">
+        <div class="col-xs-12 col-md-3">
+          <h3>Category</h3>
+          <ul class="list-group">
+            <li class="list-group-item"><a href="/produucts/produucts">all products</a> </li>
+            <% category.forEach(function(category) {%>
+            <li class="list-group-item"><a href="/produucts/category/<%=category.slug %>"><%=category.title%></a> </li>
+
+          <% })%>
+            
+          </ul>
+        </div>
+
+        <div class="col-xs-12">       
+        </div>
+
+        <div class="col-xs-12 col-md-1">         
+        
+      

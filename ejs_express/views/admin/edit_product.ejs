@@ -1,0 +1,137 @@
+<%- include('../partials/admin_header'); %>
+
+		<%messages.forEach(function(message) {%>
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			  <strong><%= message %></strong> 
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+		<%})%>	
+	
+		<h3 class="page-title">Edit product page</h3>
+		<a href="/products/products " class="btn btn-primary"> back to products </a>
+
+		<form  name ="myForm" action="/products/editProduct/<%=id %>" method="post" style="margin: 20px" enctype="multipart/form-data"> 
+			  <div class="form-group">
+			    <label for="title">Enter product title</label>
+			    <input type="text" name="title" class="form-control"  aria-describedby="pageTitle" placeholder="Enter title.." value="<%=title %>">
+			    <small  class="form-text text-muted">enter product title</small>
+			  </div>
+
+			  <div class="form-group">
+			    <label for="slug">Enter product price</label>
+			    <input type="text" name="price" class="form-control"  aria-describedby="slug" placeholder="Enter price.." value="<%=price %>">
+			    <small  class="form-text text-muted">enter product price</small>
+			  </div>
+
+			 <div class="form-group">
+			 	<label for="category">Category</label>	
+			 	<select name = "category" class="form-group">
+			 		<%categories.forEach(function(cat){%>			 			
+			 			<option value="<%=cat.slug%>"
+			 				<% if (cat.slug == category) {%>
+			 				selected  = "selected"
+			 				
+			 			<%}%>><%=cat.title %></option>
+			 	<%})%>
+			 	</select>		 	
+			 </div>
+
+			  <div class="form-group">
+			    <label for="title">Enter product description</label>
+			   <textarea name="description" id="dd" class="form-control" id="editor" cols="30" rows="10" placeholder="add description ..."><%=description %></textarea>
+			    <small  class="form-text text-muted">enter product description</small>
+			  </div>
+
+			  <div class="form-group">
+			  	<label for="currentImage"> Current Image</label>
+			  	<p><% if(image == "") {%>
+			  		<img id="imag" src="/images/noImage.png" alt="no image">
+			  	<%}else {%>
+			  		<img id="imag" src="/productImage/<%=id%>/<%=image%>" alt = "no image">
+			  	<%}%>
+			  </div>
+
+			  <div class="form-group">
+			    <label for="image">Upload image</label>
+			    <input type="file" name="image" class="form-control"  aria-describedby="image" id="img" value="<%= image %>">
+			    <img src="#" id="imgPreview" alt="no image">
+			    <small  class="form-text text-muted" >Enter Image</small>
+			  </div>
+
+			  <input type="hidden" name="pimage" value="<%= image %>">
+			  
+			 
+			  <button type="submit"  class="btn btn-primary">Submit</button>
+		</form>
+
+		<hr>
+
+		<h3> Gallery</h3>
+		<div class="row">
+			<% galleryImages.forEach(function(gallery){%>
+				<div class="col-lg-1.5">
+					<ul class="gallery">
+							<% if (image != "thumbs") {%>
+						<li>
+							<img id="imag" src="/productImage/<%=id%>/gallery/thumbs/<%=gallery %>" alt="new image"><br/>
+							<a class="confirmDelete" href="/products/delete_image/<%=gallery %>?id=<%=id%>">delete</a>
+						</li>
+						<%}%>
+					</ul>
+				</div>
+			<%})%>
+		</div>	
+		
+
+
+		<form action="/products/productGallery/<%=id%>" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm"></form>
+			<div class="fallback">
+				<input type="file" name="file" multiple>
+				<input type="submit" value="Upload">
+				
+			</div>
+	
+		</form>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js" ></script>
+
+				 <script>
+                        function readURL(input) {
+                        	if(input.files && input.files[0]){
+                        		var reader = new FileReader();
+                        		reader.onload = function(e) {
+                        			$('#imgPreview').attr('src',e.target.result).width(100).height(100);
+                        		}
+                        		reader.readAsDataURL(input.files[0]);
+                        	}
+                        }
+
+                        $('#img').change(function(){
+                        	readURL(this)
+                        })
+
+                        //dropzone
+                        Dropzone.options.dropzoneForm = {
+                        	acceptedFiles:'image/*',
+                        	init:function() {
+                        		this.on('queuecomplete',(file)=> {
+                        			setTimeout(function() {
+                        				location.reload()
+                        			},1000)
+
+                        		})
+                        	}
+                        }
+                </script>
+
+
+
+
+
+
+
+ <%- include('../partials/admin_footer'); %>
+

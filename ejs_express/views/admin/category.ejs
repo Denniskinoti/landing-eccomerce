@@ -1,0 +1,71 @@
+	<%- include('../partials/admin_header'); %>
+
+	<% if(message != "") {%>
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					  <strong><%= message %></strong> 
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+		</div>
+	<%}%>
+
+
+  <div class="container" style="margin: 5px">
+  <a  href="/category/addCategory" class="btn btn-primary"> Add New Category</a>  
+</div>
+
+
+    <%if(category == "") {%>
+          <div class="container" style="background-color: green;color:red">
+            <marquee>no categories exist</marquee>
+          </div>
+      <%}else {%>
+        <table class="table table-dark">
+  <thead>
+    <tr class="home">
+      <th scope="col">#</th>
+      <th scope="col">category</th> 
+      <th scope="col">edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+    <%category.forEach(function(category) {%>
+    <tr id="id_<%=category.id%>" class = "<%=category.slug%>">
+      <th scope="row">1</th>
+      <td><%= category.title %></td>
+      <td><%= category.content %></td>    
+      <td><a href="/category/edit/<%= category.id%>" class="btn-btn-success">edit</td>
+      <td><a href="/category/remove/<%= category.id%>" class="btn-btn-danger confirmDelete">Delete</td>     
+    </tr>
+      <%})%>
+  </tbody>
+</table>
+
+      <%}%>
+
+
+
+
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+ <script type="text/javascript">
+  $('tbody').sortable({
+    items:'tr:not(".home")',
+    placeholder:'ui-state-highlight',
+    update:function() {
+      var id = $('tbody').sortable();
+      var url = '/admin/pageReoder';
+      $.post(url,id);
+    }
+  })
+ </script>
+
+<%- include('../partials/admin_footer'); %>
+
+
+

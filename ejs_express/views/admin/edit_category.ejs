@@ -1,0 +1,31 @@
+<%- include('../partials/admin_header'); %>
+
+<% if(message != "") {%>
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					  <strong><%= message %></strong> 
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+		</div>
+	<%}%>
+
+	this is the title:<%= title %>
+	<h3 class="page-title">Edit category</h3>
+		<a href="/admin/pages" class="btn btn-primary"> back to all pages</a>
+
+		<form action="/category/edit/<%=id%>" method="post" style="margin: 20px"> 
+			  <div class="form-group">
+			    <label for="title">title</label>
+			    <input type="text" name="title" class="form-control"  aria-describedby="pageTitle" placeholder="Enter title.." value="<%=title %>">
+			    <small  class="form-text text-muted">enter page title</small>
+			  </div>
+
+			  
+			 
+			  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+
+<%- include('../partials/admin_footer'); %>
+
+
+
